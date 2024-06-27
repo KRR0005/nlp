@@ -1,0 +1,105 @@
+###### LAB 3 #####
+
+### One Hot Encoding ###
+
+import pandas as pd
+from sklearn.preprocessing import OneHotEncoder
+# Example categorical data
+categories = ['teacher', 'nurse', 'police', 'doctor']
+# Convert categorical data into a DataFrame
+data = pd.DataFrame({'Category': categories})
+# Initialize the OneHotEncoder
+encoder = OneHotEncoder(sparse_output=False, dtype=int)
+# Fit and transform the categorical data
+encoded_data = encoder.fit_transform(data)
+# Convert the encoded data to a DataFrame
+encoded_df = pd.DataFrame(encoded_data, columns=categories)
+# Print the encoded DataFrame
+encoded_df.head()
+
+# Bag Of Words (BOW):
+
+import pandas as pd
+from sklearn.feature_extraction.text import CountVectorizer
+1
+# Example text data
+documents = ["This is the first document.",
+"This document is the second document.",
+"And this is the third one.",
+"Is this the first document?"]
+# Convert text data into a DataFrame
+data = pd.DataFrame({'Text': documents})
+# Initialize the CountVectorizer
+vectorizer = CountVectorizer()
+# Fit and transform the text data
+bow_vectors = vectorizer.fit_transform(data['Text'])
+# Convert the BOW vectors to a DataFrame
+bow_df = pd.DataFrame(bow_vectors.toarray(), columns=vectorizer.
+get_feature_names_out())
+# Print the BOW DataFrame
+bow_df.head()
+
+# N-gram features
+
+
+import pandas as pd
+from sklearn.feature_extraction.text import CountVectorizer
+# Example text data
+documents = ["This is the first document.",
+"This document is the second document.",
+"And this is the third one.",
+"Is this the first document?"]
+# Convert text data into a DataFrame
+data = pd.DataFrame({'Text': documents})
+# Initialize the CountVectorizer with desired n-gram range
+ngram_vectorizer = CountVectorizer(ngram_range=(2,3))
+# Fit and transform the text data
+2
+ngram_vectors = ngram_vectorizer.fit_transform(data['Text'])
+# Convert the N-gram vectors to a DataFrame
+ngram_df = pd.DataFrame(ngram_vectors.toarray(), columns=ngram_vectorizer.
+get_feature_names_out())
+# Print the N-gram DataFrame
+ngram_df.head()
+
+
+# TF-IDF Vectorizer
+
+import pandas as pd
+from sklearn.feature_extraction.text import TfidfVectorizer
+3
+# Example text data
+documents = ["This is the first document.",
+"This document is the second document.",
+"And this is the third one.",
+"Is this the first document?"]
+# Convert text data into a DataFrame
+data = pd.DataFrame({'Text': documents})
+# Initialize the TF-IDF Vectorizer
+vectorizer = TfidfVectorizer()
+# Fit and transform the text data
+tfidf_vectors = vectorizer.fit_transform(data['Text'])
+# Convert the TF-IDF vectors to a DataFrame
+tfidf_df = pd.DataFrame(tfidf_vectors.toarray(), columns=vectorizer.
+get_feature_names_out())
+# Print the TF-IDF DataFrame
+tfidf_df.head()
+
+# FastText
+
+
+import pandas as pd
+from gensim.models import FastText
+
+# Training data
+sentences = [["I", "like", "apples"],
+["I", "enjoy", "eating", "fruits"]]
+# Training the FastText model
+model_fasttext = FastText(sentences, min_count=1, window=5, vector_size=100)
+# Accessing word vectors
+word_vectors = model_fasttext.wv
+# Creating a DataFrame for word vectors
+word_vectors_df = pd.DataFrame(word_vectors.vectors, index=word_vectors.
+index_to_key)
+# Displaying the word vectors DataFrame
+word_vectors_df.head(10)
